@@ -1,0 +1,158 @@
+/* ═══════════════════════════════════════
+   Time Scrubber — bottom bar
+   ═══════════════════════════════════════ */
+
+.time-scrubber {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: #0d0d0d;
+  border-top: 1px solid #2a2a2a;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 14px;
+  z-index: 1000;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  user-select: none;
+}
+
+/* ── Playback buttons ── */
+.ts-play-btn {
+  background: none;
+  border: 1px solid #333;
+  color: #aaa;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 11px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: border-color 0.1s, color 0.1s;
+}
+.ts-play-btn:hover { border-color: #666; color: #fff; }
+
+.ts-year-display {
+  font-size: 18px;
+  font-weight: 700;
+  color: #e8e8e8;
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+  min-width: 44px;
+  text-align: center;
+}
+
+/* ── Track ── */
+.ts-track-wrap {
+  flex: 1;
+  position: relative;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ts-track {
+  width: 100%;
+  height: 2px;
+  background: #2a2a2a;
+  position: relative;
+}
+
+.ts-track-fill {
+  height: 100%;
+  background: #555;
+  pointer-events: none;
+  transition: width 0.1s;
+}
+
+.ts-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2px;
+  height: 20px;
+  background: #e8e8e8;
+  pointer-events: none;
+}
+
+/* ── Year labels ── */
+.ts-labels {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.ts-label {
+  font-size: 9px;
+  color: #444;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.ts-label.active {
+  color: #e8e8e8;
+  font-size: 10px;
+}
+.ts-label.loading {
+  color: #666;
+}
+
+/* ── Speed controls ── */
+.ts-speed {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.ts-speed-btn {
+  background: none;
+  border: none;
+  color: #444;
+  font-size: 9px;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 3px 5px;
+  letter-spacing: 0.04em;
+  transition: color 0.1s;
+}
+.ts-speed-btn:hover { color: #888; }
+.ts-speed-btn.active {
+  color: #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+/* ── Temporal indicator badge ── */
+.ts-temporal-badge {
+  font-size: 9px;
+  color: #555;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+.ts-temporal-badge.live {
+  color: #4aa84a;
+}
+
+.ts-close-btn {
+  background: none;
+  border: none;
+  color: #444;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 2px 4px;
+  flex-shrink: 0;
+  transition: color 0.1s;
+}
+.ts-close-btn:hover { color: #888; }

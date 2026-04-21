@@ -1,0 +1,109 @@
+/* ═══════════════════════════════════════
+   CRT / Terminal shader aesthetic
+   ═══════════════════════════════════════ */
+
+/* Scanlines */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.13) 2px,
+    rgba(0, 0, 0, 0.13) 4px
+  );
+  animation: crt-flicker 9s infinite;
+}
+
+/* Vignette */
+.crt-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  91%       { opacity: 1; }
+  92%       { opacity: 0.96; }
+  93%       { opacity: 1; }
+  95%       { opacity: 0.98; }
+  96%       { opacity: 1; }
+}
+
+/* ── Color modes — applied to .map-container via .app class ── */
+
+.crt-active.crt-green .map-container,
+.crt-active.crt-green .globe3d-container {
+  filter: sepia(1) saturate(3) hue-rotate(90deg) brightness(0.75);
+}
+
+.crt-active.crt-amber .map-container,
+.crt-active.crt-amber .globe3d-container {
+  filter: sepia(1) saturate(4) hue-rotate(15deg) brightness(0.72);
+}
+
+.crt-active.crt-nightvision .map-container,
+.crt-active.crt-nightvision .globe3d-container {
+  filter: sepia(1) saturate(6) hue-rotate(70deg) brightness(0.65) contrast(1.3);
+}
+
+.crt-active.crt-flir .map-container,
+.crt-active.crt-flir .globe3d-container {
+  filter: invert(1) hue-rotate(180deg) saturate(2.5) brightness(0.9);
+}
+
+/* ── Phosphor glow on text when CRT active ── */
+.crt-active .metric-row-value,
+.crt-active .time-big,
+.crt-active .sq-count {
+  text-shadow: 0 0 6px currentColor, 0 0 14px currentColor;
+}
+
+.crt-active .dock-sq-label,
+.crt-active .sq-label,
+.crt-active .sq-main-label {
+  text-shadow: 0 0 4px rgba(200, 200, 200, 0.35);
+}
+
+/* ── Screen edge curvature illusion ── */
+.crt-active .map-container {
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.4),
+    0 0 0 2px #111,
+    0 0 30px rgba(0, 0, 0, 0.7);
+}
+
+/* ── CRT Controls row in ControlPanel ── */
+.crt-controls {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.crt-variant-btn {
+  background: none;
+  border: 1px solid #2e2e2e;
+  color: #555;
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 6px;
+  cursor: pointer;
+  transition: color 0.1s, border-color 0.1s;
+  font-family: inherit;
+}
+.crt-variant-btn:hover { color: #888; border-color: #484848; }
+.crt-variant-btn.active { color: #fff; border-color: #666; }
